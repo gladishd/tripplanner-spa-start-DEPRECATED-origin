@@ -535,11 +535,11 @@ var data = {
 
 async function seed() {
   try {
-    await db.sync({force: true});
+    await db.sync({ force: true });
     console.log("Dropped old data, now inserting data");
 
     await Promise.map(Object.keys(data), async function (name) {
-      await Promise.map(data[name], async function(item) {
+      await Promise.map(data[name], async function (item) {
         await db.model(name).create(item, { include: [Place] });
       })
     })
